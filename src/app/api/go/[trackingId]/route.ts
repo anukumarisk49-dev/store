@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Purpose: Log the click and redirect to the merchant's affiliate URL
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { trackingId: string } }
 ) {
   const trackingId = params.trackingId;
