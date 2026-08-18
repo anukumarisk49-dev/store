@@ -1,0 +1,334 @@
+// This is the Prisma schema for 99store.in
+// To set up:
+// 1. Copy .env.example to .env and configure DATABASE_URL
+// 2. Run: npx prisma migrate dev --name init
+// 3. Run: npx prisma generate
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ====================
+// User & Auth
+// ====================
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  wishlists    Wishlist[]
+  clicks       AffiliateClick[]
+  reviews      Review[]
+  searchHistory SearchHistory[]
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin") // admin, moderator
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ====================
+// Products
+// ====================
+model Category {
+  id           String   @id @default(cuid())
+  name         String   @unique
+  slug         String   @unique
+  description  String?
+  icon         String?
+  productCount Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  subcategories Subcategory[]
+  products      Product[]
+  deals         Deal[]
+}
+
+model Subcategory {
+  id         String   @id @default(cuid())
+  name       String
+  slug       String
+  categoryId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  products Product[]
+
+  @@unique([categoryId, slug])
+}
+
+model Product {
+  id                 String   @id @default(cuid())
+  name               String
+  slug               String   @unique
+  description        String?
+  shortDescription   String?
+  brand              String?
+  categoryId         String
+  subcategoryId      String?
+  originalPrice      Float
+  currentPrice       Float
+  discountPercentage Int      @default(0)
+  rating             Float    @default(0)
+  reviewCount        Int      @default(0)
+  thumbnail          String?
+  status             String   @default("active") // active, inactive, discontinued
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  // Relations
+  category       Category          @relation(fields: [categoryId], references: [id])
+  subcategory    Subcategory?      @relation(fields: [subcategoryId], references: [id])
+  images         ProductImage[]
+  tags           ProductTag[]
+  prices         ProductPrice[]
+  affiliateLinks AffiliateLink[]
+  deals          Deal[]
+  reviews        Review[]
+  wishlists      Wishlist[]
+  clicks         AffiliateClick[]
+
+  @@index([categoryId])
+  @@index([slug])
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  url       String
+  alt       String?
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model ProductTag {
+  id        String   @id @default(cuid())
+  productId String
+  tag       String
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, tag])
+}
+
+model ProductPrice {
+  id        String   @id @default(cuid())
+  productId String
+  price     Float
+  date      DateTime @default(now())
+  source    String   // "amazon", "flipkart", etc.
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId, date])
+}
+
+// ====================
+// Merchants & Affiliate
+// ====================
+model Merchant {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  logo        String?
+  website     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  affiliateNetworks AffiliateNetwork[]
+  affiliateLinks    AffiliateLink[]
+  clicks            AffiliateClick[]
+}
+
+model AffiliateNetwork {
+  id         String   @id @default(cuid())
+  name       String   // "Amazon", "Flipkart", etc.
+  merchantId String
+  networkKey String   @unique // unique key for this merchant-network combo
+  apiKey     String? // encrypted
+  commissionRate Float  @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  merchant      Merchant        @relation(fields: [merchantId], references: [id])
+  affiliateLinks AffiliateLink[]
+
+  @@unique([merchantId, name])
+}
+
+model AffiliateLink {
+  id                 String   @id @default(cuid())
+  productId          String
+  merchantId         String
+  affiliateNetworkId String
+  trackingId         String   @unique // 99store.in/go/abc123
+  affiliateUrl       String   // actual merchant affiliate URL
+  status             String   @default("active") // active, inactive, expired
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  product         Product           @relation(fields: [productId], references: [id])
+  merchant        Merchant          @relation(fields: [merchantId], references: [id])
+  affiliateNetwork AffiliateNetwork  @relation(fields: [affiliateNetworkId], references: [id])
+  clicks          AffiliateClick[]
+
+  @@unique([productId, merchantId])
+  @@index([trackingId])
+}
+
+model AffiliateClick {
+  id                String   @id @default(cuid())
+  productId         String
+  merchantId        String
+  affiliateLinkId   String
+  userId            String?
+  source            String?  // "google", "direct", etc.
+  device            String?  // user-agent
+  country           String?  // from IP
+  referrer          String?
+  conversionTracked Boolean  @default(false)
+  createdAt         DateTime @default(now())
+
+  product       Product       @relation(fields: [productId], references: [id])
+  merchant      Merchant      @relation(fields: [merchantId], references: [id])
+  affiliateLink AffiliateLink @relation(fields: [affiliateLinkId], references: [id])
+  user          User?         @relation(fields: [userId], references: [id])
+
+  @@index([productId])
+  @@index([merchantId])
+  @@index([createdAt])
+}
+
+// ====================
+// Deals
+// ====================
+model Deal {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  productId   String
+  categoryId  String
+  discount    Int
+  expiresAt   DateTime
+  featured    Boolean  @default(false)
+  status      String   @default("active") // active, expired, scheduled
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  product  Product  @relation(fields: [productId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+
+  @@index([expiresAt])
+  @@index([featured])
+}
+
+// ====================
+// Reviews & Ratings
+// ====================
+model Review {
+  id        String   @id @default(cuid())
+  productId String
+  userId    String
+  rating    Int      // 1-5
+  title     String?
+  comment   String?
+  helpful   Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, userId])
+}
+
+// ====================
+// Wishlist
+// ====================
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+}
+
+// ====================
+// Analytics
+// ====================
+model SearchHistory {
+  id        String   @id @default(cuid())
+  userId    String?
+  query     String
+  resultCount Int    @default(0)
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([query])
+  @@index([createdAt])
+}
+
+// ====================
+// Site Configuration
+// ====================
+model SiteBanner {
+  id        String   @id @default(cuid())
+  title     String
+  image     String
+  link      String?
+  position  Int
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BlogPost {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String
+  excerpt   String?
+  image     String?
+  author    String?
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+}
+
+model BlogCategory {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+}

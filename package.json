@@ -1,0 +1,46 @@
+{
+  "name": "99store",
+  "version": "0.1.0",
+  "description": "99store - Affiliate-based product discovery platform",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:push": "prisma db push",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio",
+    "db:migrate": "prisma migrate dev"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@tanstack/react-query": "^5.0.0",
+    "@tanstack/react-router": "^1.0.0",
+    "tailwindcss": "^3.3.0",
+    "zustand": "^4.4.0",
+    "axios": "^1.5.0",
+    "react-hook-form": "^7.48.0",
+    "zod": "^3.22.0",
+    "@hookform/resolvers": "^3.3.0",
+    "next-auth": "^4.24.0",
+    "prisma": "^5.4.0",
+    "@prisma/client": "^5.4.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.2.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.31",
+    "eslint": "^8.50.0",
+    "eslint-config-next": "^14.0.0",
+    "ts-node": "^10.9.0"
+  }
+}
