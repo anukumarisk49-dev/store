@@ -2,6 +2,10 @@
   "name": "99store",
   "version": "0.1.0",
   "description": "99store - Affiliate-based product discovery platform",
+  "engines": {
+    "node": "24.x",
+    "npm": "11.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

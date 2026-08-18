@@ -8,10 +8,10 @@ export const metadata = {
   description: 'Discover the best deals and discounts on products from top merchants',
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-gray-50">
+      <body className="bg-background text-text">
         <Providers>
           <Header />
           <main className="min-h-screen">

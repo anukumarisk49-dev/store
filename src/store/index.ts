@@ -9,7 +9,7 @@ interface AuthStore {
   getToken: () => string | null;
 }
 
-export const useAuthStore = create<AuthStore>((set, get) => ({
+export const useAuthStore = create<AuthStore>((set, _get) => ({
   user: null,
   isAuthenticated: false,
 

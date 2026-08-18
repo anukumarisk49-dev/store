@@ -27,7 +27,7 @@ const mockProduct = {
   ],
 };
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
+export default function ProductPage({ params: _params }: { params: { slug: string } }) {
   const [selectedMerchant, setSelectedMerchant] = useState(mockProduct.merchants[0]);
 
   return (

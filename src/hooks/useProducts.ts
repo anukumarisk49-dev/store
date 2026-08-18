@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { api } from './api';
+import { api } from '@/services/api';
 
 export function useProducts(params?: { category?: string; page?: number; limit?: number }) {
   return useQuery({

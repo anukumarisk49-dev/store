@@ -2,7 +2,7 @@
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
+    <header className="sticky top-0 z-50 bg-surface shadow-md border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -15,28 +15,28 @@ export default function Header() {
             <input
               type="text"
               placeholder="Search deals..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             />
           </div>
 
           {/* Actions */}
           <div className="flex items-center gap-6">
-            <button className="text-gray-600 hover:text-primary transition">
+            <button className="text-gray-600 hover:text-primary transition font-medium">
               ♡ Wishlist
             </button>
-            <button className="text-gray-600 hover:text-primary transition">
+            <button className="text-gray-600 hover:text-primary transition font-medium">
               👤 Login
             </button>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex gap-8 mt-4 text-sm font-medium">
-          <a href="/" className="text-gray-700 hover:text-primary">Home</a>
-          <a href="/deals" className="text-gray-700 hover:text-primary">Deals</a>
-          <a href="/trending" className="text-gray-700 hover:text-primary">Trending</a>
-          <a href="/categories" className="text-gray-700 hover:text-primary">Categories</a>
-          <a href="/compare" className="text-gray-700 hover:text-primary">Compare</a>
+        <nav className="flex gap-8 mt-4 text-sm font-medium border-t border-gray-100 pt-4">
+          <a href="/" className="text-gray-700 hover:text-primary transition">Home</a>
+          <a href="/deals" className="text-gray-700 hover:text-primary transition">Deals</a>
+          <a href="/trending" className="text-gray-700 hover:text-primary transition">Trending</a>
+          <a href="/categories" className="text-gray-700 hover:text-primary transition">Categories</a>
+          <a href="/compare" className="text-gray-700 hover:text-primary transition">Compare</a>
         </nav>
       </div>
     </header>

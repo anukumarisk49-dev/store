@@ -16,21 +16,33 @@ export async function GET(request: NextRequest) {
       rating: 4.5,
       category: 'electronics',
     },
+    {
+      id: '2',
+      name: 'Smart Watch Pro',
+      price: 1999,
+      originalPrice: 3499,
+      rating: 4.3,
+      category: 'electronics',
+    },
     // Add more products from database
   ];
 
+  const filteredProducts = category
+    ? products.filter((product) => product.category === category)
+    : products;
+
   return NextResponse.json({
     success: true,
-    data: products,
+    data: filteredProducts,
     pagination: {
       page: parseInt(page),
       limit: parseInt(limit),
-      total: 100,
+      total: filteredProducts.length,
     },
   });
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   // TODO: Add product (admin only)
   return NextResponse.json({ message: 'Not implemented' }, { status: 501 });
 }
