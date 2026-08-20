@@ -7,6 +7,7 @@ interface CategoryProduct {
   id: string;
   name: string;
   image: string;
+  alt?: string;
   price: number;
   originalPrice: number;
   discount: number;
@@ -113,7 +114,7 @@ export default function CategoryProductGrid({ products }: CategoryProductGridPro
             <div className="relative w-full h-48 bg-gray-100 overflow-hidden">
               <img
                 src={product.image}
-                alt={product.name}
+                alt={product.alt || product.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
               {product.discount > 0 && (

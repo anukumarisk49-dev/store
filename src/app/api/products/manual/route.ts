@@ -32,12 +32,27 @@ export async function POST(request: NextRequest) {
     const productIndex = catalog.categories[category].products.findIndex((item: { id: string }) => item.id === productData.id);
     if (productIndex >= 0) catalog.categories[category].products[productIndex] = productData;
     else catalog.categories[category].products.push(productData);
-    await fs.writeFile(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
+
+    const updatedCatalog = `${JSON.stringify(catalog, null, 2)}\n`;
+    const affiliateEntry = `  '${productData.id}': '${affiliateUrl}',`;
+
+    if (process.env.VERCEL === '1') {
+      return NextResponse.json({
+        success: true,
+        persisted: false,
+        message: 'Vercel uses a read-only filesystem. Download the generated files and commit them to your repository.',
+        productJson: updatedCatalog,
+        affiliateEntry,
+        affiliateFile: `src/data/affiliate/${category}.ts`,
+      });
+    }
+
+    await fs.writeFile(catalogPath, updatedCatalog);
 
     const affiliatePath = path.join(rootPath, 'src', 'data', 'affiliate', `${category}.ts`);
     let affiliateFile = await fs.readFile(affiliatePath, 'utf8');
     const escapedId = productData.id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const entry = `  '${productData.id}': '${affiliateUrl}',`;
+    const entry = affiliateEntry;
     const entryPattern = new RegExp(`^\\s*'${escapedId}':`, 'm');
     if (entryPattern.test(affiliateFile)) {
       affiliateFile = affiliateFile.replace(new RegExp(`^\\s*'${escapedId}':[^\\n]*`, 'm'), entry);

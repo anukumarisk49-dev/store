@@ -132,6 +132,16 @@ The script updates product details in `public/data/products.json` and does not c
 
 Flipkart may return HTTP 403 when it rate-limits automated requests. In that case, wait and retry later or enter the verified details manually.
 
+### Import a Flipkart Listing
+
+To import products from a saved Flipkart listing page, save the complete HTML as `flipkart-listing.html` in the project root, then run:
+
+```powershell
+npm run import:flipkart -- --file=flipkart-listing.html --category=toys
+```
+
+The importer extracts product names, image `alt` text, images, prices, MRP, discounts, ratings, reviews, and source links. It saves images with product-based names in `public/images/products/` and updates `public/data/products.json`. Add EarnKaro Profit Links separately in `src/data/affiliate/toys.ts`.
+
 ## 📁 Project Structure
 
 ```

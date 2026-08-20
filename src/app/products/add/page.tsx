@@ -14,12 +14,22 @@ export default function AddProductPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [exportData, setExportData] = useState<{ productJson: string; affiliateEntry: string; affiliateFile: string } | null>(null);
+
+  const download = (filename: string, content: string) => {
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(new Blob([content], { type: 'text/plain' }));
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
     setError('');
     setMessage('');
+    setExportData(null);
     const form = new FormData(event.currentTarget);
     const id = String(form.get('id')).trim();
     const affiliateUrl = String(form.get('affiliateUrl')).trim();
@@ -45,6 +55,11 @@ export default function AddProductPage() {
       const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
       const data = await response.json();
       if (!response.ok) { setError(data.error || 'Could not save this product.'); return; }
+      if (data.persisted === false) {
+        setExportData({ productJson: data.productJson, affiliateEntry: data.affiliateEntry, affiliateFile: data.affiliateFile });
+        setMessage(data.message);
+        return;
+      }
       setMessage(data.message || 'Product added successfully.');
       window.location.assign(`/categories/${category}`);
     } catch { setError('The local server could not be reached. Make sure npm run dev is running.'); }
@@ -77,6 +92,7 @@ export default function AddProductPage() {
       </form>
       {error && <div className="mt-6 rounded-lg bg-red-50 p-4 text-sm text-red-700">{error}</div>}
       {message && <div className="mt-6 rounded-lg bg-green-50 p-4 text-sm text-green-700">{message}</div>}
+      {exportData && <div className="mt-6 bg-white rounded-lg shadow p-6 space-y-4"><h2 className="font-bold text-lg">Download and commit these changes</h2><div><p className="text-sm font-bold mb-2">Product catalog JSON</p><button type="button" onClick={() => download('products.json', exportData.productJson)} className="bg-primary text-white px-4 py-2 rounded-lg font-bold">Download products.json</button></div><div><p className="text-sm font-bold mb-2">Add this line to {exportData.affiliateFile}</p><pre className="bg-gray-900 text-green-300 rounded-lg p-3 text-sm overflow-auto">{exportData.affiliateEntry}</pre><button type="button" onClick={() => navigator.clipboard.writeText(exportData.affiliateEntry)} className="mt-2 border border-primary text-primary px-4 py-2 rounded-lg font-bold">Copy affiliate line</button></div></div>}
     </main>
   );
 }

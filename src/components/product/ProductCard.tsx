@@ -7,6 +7,7 @@ interface ProductCardProps {
   id: string;
   name: string;
   image: string;
+  alt?: string;
   price: number;
   originalPrice: number;
   discount: number;
@@ -21,6 +22,7 @@ export default function ProductCard({
   id,
   name,
   image,
+  alt,
   price,
   originalPrice,
   discount,
@@ -60,7 +62,7 @@ export default function ProductCard({
         {image ? (
           <img
             src={image}
-            alt={name}
+            alt={alt || name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
