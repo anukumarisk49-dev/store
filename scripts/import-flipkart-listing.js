@@ -40,7 +40,7 @@ function absoluteUrl(value) {
   return value.startsWith('http') ? value : `https://www.flipkart.com${value}`;
 }
 
-function parseProducts(html) {
+function parseProducts(html, category) {
   const products = [];
   const cardPattern = /<div[^>]+data-id="([^"]+)"[^>]*>([\s\S]*?)(?=<div[^>]+data-id="|<\/div>\s*<\/div>\s*<\/div>\s*<\/div>)/gi;
 
@@ -58,7 +58,7 @@ function parseProducts(html) {
     if (!imageMatch || !titleMatch || !priceMatch) continue;
 
     const name = cleanName(titleMatch[1].replace(/<[^>]+>/g, '')) || cleanName(imageMatch[1]);
-    const id = `toys-${slugify(name)}`;
+    const id = `${category}-${slugify(name)}`;
     const price = numberFrom(priceMatch[1]);
     const originalPrice = numberFrom(mrpMatch?.[1]) || price;
 
@@ -97,7 +97,7 @@ async function main() {
   }
 
   const html = await fs.readFile(path.resolve(file), 'utf8');
-  const products = parseProducts(html);
+  const products = parseProducts(html, category);
   if (!products.length) throw new Error('No products found. Save the complete Flipkart listing HTML and try again.');
 
   const catalog = JSON.parse(await fs.readFile(catalogPath, 'utf8'));

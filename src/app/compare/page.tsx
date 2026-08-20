@@ -5,7 +5,20 @@ import catalog from '../../../public/data/products.json';
 import { getAffiliateUrl } from '@/data/affiliateLinks';
 import { logAffiliateClick } from '@/lib/logAffiliateClick';
 
-const comparisonProducts = Object.values(catalog.categories)
+type ComparisonProduct = {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  originalPrice: number;
+  discount: number;
+  rating: number;
+  reviewCount: number;
+  merchant: string;
+  affiliateUrl?: string;
+};
+
+const comparisonProducts = (Object.values(catalog.categories) as { products: ComparisonProduct[] }[])
   .flatMap((category) => category.products)
   .slice(0, 6);
 

@@ -9,7 +9,15 @@ type Message = {
   text: string;
 };
 
-const allProducts = Object.values(catalog.categories).flatMap((category) => category.products);
+type AssistantProduct = {
+  name: string;
+  merchant: string;
+  price: number;
+  discount: number;
+};
+
+const allProducts = (Object.values(catalog.categories) as { products: AssistantProduct[] }[])
+  .flatMap((category) => category.products);
 
 const quickQuestions = [
   'Show me the best electronics deal',
