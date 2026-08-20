@@ -7,9 +7,9 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { trackingId: string } }
+  { params }: { params: Promise<{ trackingId: string }> }
 ) {
-  const trackingId = params.trackingId;
+  const { trackingId } = await params;
 
   try {
     const affiliateLink = await prisma.affiliateLink.findUnique({

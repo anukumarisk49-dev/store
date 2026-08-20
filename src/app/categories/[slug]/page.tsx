@@ -1,9 +1,9 @@
 'use client';
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Mock categories data
@@ -190,11 +190,12 @@ const categoryProducts = {
   ],
 };
 
-export default function CategoryPage({ params }: CategoryPageProps) {
-  const category = categoryData[params.slug];
-  const mockProducts = params.slug === 'fashion'
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { slug } = await params;
+  const category = categoryData[slug];
+  const mockProducts = slug === 'fashion'
     ? fashionProducts
-    : categoryProducts[params.slug as keyof typeof categoryProducts] || electronicsProducts;
+    : categoryProducts[slug as keyof typeof categoryProducts] || electronicsProducts;
 
   if (!category) {
     return (

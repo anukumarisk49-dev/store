@@ -27,7 +27,8 @@ const mockProduct = {
   ],
 };
 
-export default function ProductPage({ params: _params }: { params: { slug: string } }) {
+export default async function ProductPage({ params: _params }: { params: Promise<{ slug: string }> }) {
+  await _params;
   const [selectedMerchant, setSelectedMerchant] = useState(mockProduct.merchants[0]);
 
   return (
