@@ -116,6 +116,22 @@ For example, add an Electronics URL in `src/data/affiliate/electronics.ts`:
 
 Every **Buy Now** button uses the central resolver, which merges all category files. This mode does not need `DATABASE_URL` for displaying products or opening direct affiliate URLs.
 
+### Update a Product from Flipkart
+
+Use the catalog script with a normal Flipkart product page URL. Use equals-style arguments in PowerShell:
+
+```powershell
+npm run fetch:flipkart -- --url="https://www.flipkart.com/product-page" --id=beauty-5 --category=beauty
+```
+
+The script updates product details in `public/data/products.json` and does not change the EarnKaro link files. Add the Profit Link manually to the matching file, for example `src/data/affiliate/beauty.ts`:
+
+```ts
+'beauty-5': 'https://fktr.in/your-profit-link',
+```
+
+Flipkart may return HTTP 403 when it rate-limits automated requests. In that case, wait and retry later or enter the verified details manually.
+
 ## 📁 Project Structure
 
 ```

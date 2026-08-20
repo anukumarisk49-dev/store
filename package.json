@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "fetch:flipkart": "node scripts/fetch-flipkart-product.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

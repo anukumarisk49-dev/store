@@ -37,6 +37,7 @@ export default function Header() {
           <a href="/trending" className="text-gray-700 hover:text-primary">Trending</a>
           <a href="/categories" className="text-gray-700 hover:text-primary">Categories</a>
           <a href="/compare" className="text-gray-700 hover:text-primary">Compare</a>
+          <a href="/products/add" className="text-gray-700 hover:text-primary">Add Product</a>
         </nav>
       </div>
     </header>

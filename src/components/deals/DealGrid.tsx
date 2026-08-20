@@ -98,6 +98,11 @@ interface DealGridProps {
   sortBy?: 'trending' | 'discount';
 }
 
+function hasTimer(productId: string) {
+  const hash = productId.split('').reduce((total, character) => total + character.charCodeAt(0), 0);
+  return hash % 4 === 0;
+}
+
 export default function DealGrid({ sortBy = 'trending' }: DealGridProps) {
   const [catalogDeals, setCatalogDeals] = useState(mockDeals);
 
@@ -133,6 +138,7 @@ export default function DealGrid({ sortBy = 'trending' }: DealGridProps) {
           rating={deal.rating}
           reviewCount={deal.reviewCount}
           merchant={deal.merchant}
+          showTimer={hasTimer(deal.id)}
         />
       ))}
     </div>

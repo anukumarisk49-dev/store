@@ -1,15 +1,17 @@
+import catalog from '../../../public/data/products.json';
+
 export default function CategoriesPage() {
   const categories = [
-    { name: 'Electronics', icon: '📱', products: 1250, slug: 'electronics' },
-    { name: 'Fashion', icon: '👕', products: 3420, slug: 'fashion' },
-    { name: 'Home & Kitchen', icon: '🏠', products: 2100, slug: 'home-kitchen' },
-    { name: 'Beauty', icon: '💄', products: 890, slug: 'beauty' },
-    { name: 'Mobile Accessories', icon: '📞', products: 1560, slug: 'mobile-accessories' },
-    { name: 'Grocery', icon: '🛒', products: 4200, slug: 'grocery' },
-    { name: 'Gaming', icon: '🎮', products: 650, slug: 'gaming' },
-    { name: 'Sports', icon: '⚽', products: 780, slug: 'sports' },
-    { name: 'Books', icon: '📚', products: 920, slug: 'books' },
-    { name: 'Toys', icon: '🧸', products: 450, slug: 'toys' },
+    { name: 'Electronics', icon: '📱', slug: 'electronics' },
+    { name: 'Fashion', icon: '👕', slug: 'fashion' },
+    { name: 'Home & Kitchen', icon: '🏠', slug: 'home-kitchen' },
+    { name: 'Beauty', icon: '💄', slug: 'beauty' },
+    { name: 'Mobile Accessories', icon: '📞', slug: 'mobile-accessories' },
+    { name: 'Grocery', icon: '🛒', slug: 'grocery' },
+    { name: 'Gaming', icon: '🎮', slug: 'gaming' },
+    { name: 'Sports', icon: '⚽', slug: 'sports' },
+    { name: 'Books', icon: '📚', slug: 'books' },
+    { name: 'Toys', icon: '🧸', slug: 'toys' },
   ];
 
   return (
@@ -25,7 +27,7 @@ export default function CategoriesPage() {
           >
             <div className="text-6xl text-center mb-4">{category.icon}</div>
             <h3 className="font-bold text-lg text-center mb-2">{category.name}</h3>
-            <p className="text-sm text-gray-600 text-center">{category.products} products</p>
+            <p className="text-sm text-gray-600 text-center">{catalog.categories[category.slug as keyof typeof catalog.categories]?.products.length || 0} products</p>
           </a>
         ))}
       </div>

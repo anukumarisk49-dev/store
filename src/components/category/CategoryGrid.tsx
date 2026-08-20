@@ -1,16 +1,19 @@
 'use client';
 
 import CategoryCard from './CategoryCard';
+import catalog from '../../../public/data/products.json';
 
 const categories = [
-  { name: 'Electronics', icon: '📱', count: 1250 },
-  { name: 'Fashion', icon: '👕', count: 3420 },
-  { name: 'Home & Kitchen', icon: '🏠', count: 2100 },
-  { name: 'Beauty', icon: '💄', count: 890 },
-  { name: 'Mobile Accessories', icon: '📞', count: 1560 },
-  { name: 'Grocery', icon: '🛒', count: 4200 },
-  { name: 'Gaming', icon: '🎮', count: 650 },
-  { name: 'Sports', icon: '⚽', count: 780 },
+  { name: 'Electronics', icon: '📱', slug: 'electronics' },
+  { name: 'Fashion', icon: '👕', slug: 'fashion' },
+  { name: 'Home & Kitchen', icon: '🏠', slug: 'home-kitchen' },
+  { name: 'Beauty', icon: '💄', slug: 'beauty' },
+  { name: 'Mobile Accessories', icon: '📞', slug: 'mobile-accessories' },
+  { name: 'Grocery', icon: '🛒', slug: 'grocery' },
+  { name: 'Gaming', icon: '🎮', slug: 'gaming' },
+  { name: 'Sports', icon: '⚽', slug: 'sports' },
+  { name: 'Books', icon: '📚', slug: 'books' },
+  { name: 'Toys', icon: '🧸', slug: 'toys' },
 ];
 
 export default function CategoryGrid() {
@@ -21,8 +24,8 @@ export default function CategoryGrid() {
           key={category.name}
           name={category.name}
           icon={category.icon}
-          count={category.count}
-          slug={category.name.toLowerCase().replace(/ /g, '-')}
+          count={catalog.categories[category.slug as keyof typeof catalog.categories]?.products.length || 0}
+          slug={category.slug}
         />
       ))}
     </div>
