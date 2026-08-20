@@ -1,37 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getPrisma } from '@/lib/prisma';
+import catalog from '../../../../../public/data/products.json';
+
+export const dynamic = 'force-dynamic';
 
 // This is the tracking endpoint for affiliate links
 // Route: /api/go/:trackingId
 // Purpose: Log the click and redirect to the merchant's affiliate URL
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ trackingId: string }> }
 ) {
   const { trackingId } = await params;
 
   try {
-    const prisma = getPrisma();
-    const affiliateLink = await prisma.affiliateLink.findUnique({
-      where: { trackingId },
-    });
+    const product = Object.values(catalog.categories)
+      .flatMap((category) => category.products)
+      .find((item) => (item as { trackingId?: string }).trackingId === trackingId) as
+      | { affiliateUrl?: string }
+      | undefined;
 
-    if (!affiliateLink || affiliateLink.status !== 'active') {
+    if (!product?.affiliateUrl) {
       return NextResponse.json({ error: 'Affiliate link not found' }, { status: 404 });
     }
 
-    await prisma.affiliateClick.create({
-      data: {
-        productId: affiliateLink.productId,
-        merchantId: affiliateLink.merchantId,
-        affiliateLinkId: affiliateLink.id,
-        device: request.headers.get('user-agent'),
-        referrer: request.headers.get('referer'),
-      },
-    });
-
-    return NextResponse.redirect(affiliateLink.affiliateUrl, { status: 302 });
+    return NextResponse.redirect(product.affiliateUrl, { status: 302 });
   } catch (error) {
     console.error('Affiliate redirect error:', error);
     return NextResponse.json(
