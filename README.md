@@ -92,7 +92,7 @@ To add a product manually:
 1. Copy an image into `public/images/products/`.
 2. Add a product object to the desired category in `public/data/products.json`.
 3. Set `image` to the repository path, for example `/images/products/my-laptop.jpg`.
-4. Add the affiliate URL for the product ID in `src/data/affiliateLinks.ts`:
+4. Add the affiliate URL for the product ID in the matching category file inside `src/data/affiliate/`:
 
 ```json
 {
@@ -108,13 +108,13 @@ To add a product manually:
 }
 ```
 
-Then add the URL in `src/data/affiliateLinks.ts`:
+For example, add an Electronics URL in `src/data/affiliate/electronics.ts`:
 
 ```ts
 'electronics-my-laptop': 'https://www.amazon.in/your-affiliate-product-url',
 ```
 
-Every **Buy Now** button uses this single affiliate link registry. This mode does not need `DATABASE_URL` for displaying products or opening direct affiliate URLs.
+Every **Buy Now** button uses the central resolver, which merges all category files. This mode does not need `DATABASE_URL` for displaying products or opening direct affiliate URLs.
 
 ## 📁 Project Structure
 
