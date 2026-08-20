@@ -230,66 +230,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         </div>
       </div>
 
-      {/* Filters & Sorting */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        {/* Filters Sidebar */}
-        <div className="md:col-span-1">
-          <div className="bg-white p-6 rounded-lg shadow sticky top-20">
-            <h3 className="font-bold text-lg mb-4">Filters</h3>
-
-            {/* Price Range */}
-            <div className="mb-6">
-              <label className="block text-sm font-bold mb-2">Price Range</label>
-              <input type="range" min="0" max="100000" className="w-full" />
-            </div>
-
-            {/* Rating */}
-            <div className="mb-6">
-              <label className="block text-sm font-bold mb-2">Minimum Rating</label>
-              <select className="w-full px-3 py-2 border rounded text-sm">
-                <option>All</option>
-                <option>4★ & above</option>
-                <option>3★ & above</option>
-              </select>
-            </div>
-
-            {/* Brand */}
-            <div className="mb-6">
-              <label className="block text-sm font-bold mb-2">Brand</label>
-              <select className="w-full px-3 py-2 border rounded text-sm">
-                <option>All Brands</option>
-                <option>Samsung</option>
-                <option>Apple</option>
-                <option>boAt</option>
-                <option>Sony</option>
-              </select>
-            </div>
-
-            <button className="w-full bg-primary text-white py-2 rounded-lg font-bold text-sm hover:bg-opacity-90 transition">
-              Apply Filters
-            </button>
-          </div>
-        </div>
-
-        {/* Products Grid */}
-        <div className="md:col-span-3">
-          <div className="flex justify-between items-center mb-6">
-            <p className="text-gray-600">
-              Showing 1-{mockProducts.length} of {category.products} products in {category.name}
-            </p>
-            <select className="px-3 py-2 border rounded text-sm">
-              <option>Sort by: Relevance</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-              <option>Highest Discount</option>
-              <option>Best Rating</option>
-              <option>Newest First</option>
-            </select>
-          </div>
-
-          <CategoryProductGrid products={mockProducts} />
-        </div>
-      </div>
+      <CategoryProductGrid products={mockProducts} />
     </div>
   );
 }

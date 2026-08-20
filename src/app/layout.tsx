@@ -2,6 +2,7 @@ import './globals.css';
 import { Providers } from './providers';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import StoreAssistant from '@/components/layout/StoreAssistant';
 
 export const metadata = {
   title: '99Storepe - Best Deals & Discounts',
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="min-h-screen">
             {children}
           </main>
+          <StoreAssistant />
           <Footer />
         </Providers>
       </body>
