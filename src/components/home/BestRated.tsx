@@ -3,7 +3,20 @@
 import { useEffect, useState } from 'react';
 import ProductCard from '@/components/product/ProductCard';
 
-const mockProducts = [
+interface RatedProduct {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  originalPrice: number;
+  discount: number;
+  rating: number;
+  reviewCount: number;
+  affiliateUrl?: string;
+  merchant: string;
+}
+
+const mockProducts: RatedProduct[] = [
   {
     id: '1',
     name: 'Apple iPhone 15 Pro Max',
@@ -51,7 +64,7 @@ const mockProducts = [
 ];
 
 export default function BestRated() {
-  const [products, setProducts] = useState(mockProducts);
+  const [products, setProducts] = useState<RatedProduct[]>(mockProducts);
 
   useEffect(() => {
     fetch('/data/products.json')
@@ -73,6 +86,7 @@ export default function BestRated() {
           discount={product.discount}
           rating={product.rating}
           reviewCount={product.reviewCount}
+          affiliateUrl={product.affiliateUrl}
           merchant={product.merchant}
         />
       ))}

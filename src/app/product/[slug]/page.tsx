@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { getAffiliateUrl } from '@/data/affiliateLinks';
+import { logAffiliateClick } from '@/lib/logAffiliateClick';
 
 // This would be populated from the database
 const mockProduct = {
@@ -115,6 +116,7 @@ export default async function ProductPage({ params: _params }: { params: Promise
               href={getAffiliateUrl(mockProduct.id === '1' ? 'electronics-1' : mockProduct.id)}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => logAffiliateClick(mockProduct.id, getAffiliateUrl(mockProduct.id === '1' ? 'electronics-1' : mockProduct.id))}
               className="flex-1 bg-primary text-white text-center py-3 rounded-lg font-bold hover:bg-opacity-90 transition"
             >
               Buy Now on {selectedMerchant.name}

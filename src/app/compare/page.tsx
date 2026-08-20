@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import catalog from '../../../public/data/products.json';
 import { getAffiliateUrl } from '@/data/affiliateLinks';
+import { logAffiliateClick } from '@/lib/logAffiliateClick';
 
 const comparisonProducts = Object.values(catalog.categories)
   .flatMap((category) => category.products)
@@ -109,9 +110,10 @@ export default function ComparePage() {
                         {isLowest && <p className="text-xs text-green-700 font-bold">Lowest price</p>}
                       </div>
                       <a
-                        href={getAffiliateUrl(selectedProduct.id)}
+                        href={selectedProduct.affiliateUrl || getAffiliateUrl(selectedProduct.id)}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => logAffiliateClick(selectedProduct.id, selectedProduct.affiliateUrl || getAffiliateUrl(selectedProduct.id))}
                         className="px-4 py-2 border-2 border-primary text-primary rounded-lg font-bold hover:bg-secondary transition"
                       >
                         Visit store

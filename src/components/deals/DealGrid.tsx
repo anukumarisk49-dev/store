@@ -3,7 +3,20 @@
 import { useEffect, useState } from 'react';
 import ProductCard from '@/components/product/ProductCard';
 
-const mockDeals = [
+interface DealProduct {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  originalPrice: number;
+  discount: number;
+  rating: number;
+  reviewCount: number;
+  affiliateUrl?: string;
+  merchant: string;
+}
+
+const mockDeals: DealProduct[] = [
   {
     id: '1',
     name: 'boAt Rockerz 450 Wireless Earbuds',
@@ -104,7 +117,7 @@ function hasTimer(productId: string) {
 }
 
 export default function DealGrid({ sortBy = 'trending' }: DealGridProps) {
-  const [catalogDeals, setCatalogDeals] = useState(mockDeals);
+  const [catalogDeals, setCatalogDeals] = useState<DealProduct[]>(mockDeals);
 
   useEffect(() => {
     fetch('/data/products.json')
@@ -137,6 +150,7 @@ export default function DealGrid({ sortBy = 'trending' }: DealGridProps) {
           discount={deal.discount}
           rating={deal.rating}
           reviewCount={deal.reviewCount}
+          affiliateUrl={deal.affiliateUrl}
           merchant={deal.merchant}
           showTimer={hasTimer(deal.id)}
         />

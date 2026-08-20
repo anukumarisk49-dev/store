@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getAffiliateUrl } from '@/data/affiliateLinks';
+import { logAffiliateClick } from '@/lib/logAffiliateClick';
 
 interface ProductCardProps {
   id: string;
@@ -13,6 +14,7 @@ interface ProductCardProps {
   discount: number;
   rating: number;
   reviewCount: number;
+  affiliateUrl?: string;
   merchant?: string;
   trackingId?: string;
   showTimer?: boolean;
@@ -28,11 +30,13 @@ export default function ProductCard({
   discount,
   rating,
   reviewCount,
+  affiliateUrl,
   merchant,
   trackingId,
   showTimer = false,
 }: ProductCardProps) {
-  const dealUrl = trackingId ? `/api/go/${trackingId}` : getAffiliateUrl(id);
+  const buyUrl = trackingId ? `/api/go/${trackingId}` : affiliateUrl || getAffiliateUrl(id);
+  const loggedUrl = affiliateUrl || getAffiliateUrl(id);
   const [secondsLeft, setSecondsLeft] = useState<number | null>(null);
 
   useEffect(() => {
@@ -63,7 +67,7 @@ export default function ProductCard({
           <img
             src={image}
             alt={alt || name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-contain p-2 transition-transform duration-300"
           />
         ) : (
           <div className="w-full h-full bg-gray-300 flex items-center justify-center">No Image</div>
@@ -106,13 +110,14 @@ export default function ProductCard({
 
         {/* CTA Button */}
         <a
-            href={dealUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full bg-primary text-white text-center py-2 rounded-lg font-bold hover:bg-opacity-90 transition"
-          >
-            Buy Now
-          </a>
+          href={buyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => logAffiliateClick(id, loggedUrl)}
+          className="block w-full bg-primary text-white text-center py-2 rounded-lg font-bold hover:bg-opacity-90 transition"
+        >
+          Buy Now
+        </a>
       </div>
     </div>
   );

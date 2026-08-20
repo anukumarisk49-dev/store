@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { getAffiliateUrl } from '@/data/affiliateLinks';
+import { logAffiliateClick } from '@/lib/logAffiliateClick';
 
 interface CategoryProduct {
   id: string;
@@ -13,6 +14,7 @@ interface CategoryProduct {
   discount: number;
   rating: number;
   reviewCount: number;
+  affiliateUrl?: string;
   brand?: string;
   merchant?: string;
 }
@@ -115,7 +117,7 @@ export default function CategoryProductGrid({ products }: CategoryProductGridPro
               <img
                 src={product.image}
                 alt={product.alt || product.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-contain p-2 transition-transform duration-300"
               />
               {product.discount > 0 && (
                 <div className="absolute top-2 right-2 bg-danger text-white px-3 py-1 rounded-full text-sm font-bold">
@@ -141,10 +143,11 @@ export default function CategoryProductGrid({ products }: CategoryProductGridPro
                 </div>
               </div>
 
-              <a
-                  href={getAffiliateUrl(product.id)}
+                <a
+                  href={product.affiliateUrl || getAffiliateUrl(product.id)}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => logAffiliateClick(product.id, product.affiliateUrl || getAffiliateUrl(product.id))}
                   className="block w-full bg-primary text-white text-center py-2 rounded-lg font-bold text-sm hover:bg-opacity-90 transition"
                 >
                   Buy Now
