@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { getAffiliateUrl } from '@/data/affiliateLinks';
 
 interface CategoryProduct {
   id: string;
@@ -11,7 +12,6 @@ interface CategoryProduct {
   discount: number;
   rating: number;
   reviewCount: number;
-  affiliateUrl?: string;
   brand?: string;
   merchant?: string;
 }
@@ -140,20 +140,14 @@ export default function CategoryProductGrid({ products }: CategoryProductGridPro
                 </div>
               </div>
 
-              {product.affiliateUrl ? (
-                <a
-                  href={product.affiliateUrl}
+              <a
+                  href={getAffiliateUrl(product.id)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full bg-primary text-white text-center py-2 rounded-lg font-bold text-sm hover:bg-opacity-90 transition"
                 >
-                  View Deal
+                  Buy Now
                 </a>
-              ) : (
-                <button disabled className="w-full bg-gray-300 text-gray-600 py-2 rounded-lg font-bold text-sm cursor-not-allowed">
-                  Add affiliate URL
-                </button>
-              )}
             </div>
           </div>
               ))}

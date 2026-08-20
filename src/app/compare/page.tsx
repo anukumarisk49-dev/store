@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import catalog from '../../../public/data/products.json';
+import { getAffiliateUrl } from '@/data/affiliateLinks';
 
 const comparisonProducts = Object.values(catalog.categories)
   .flatMap((category) => category.products)
@@ -26,18 +27,6 @@ function getPrices(basePrice: number, productIndex: number): Record<Merchant, nu
     Meesho: Math.max(99, basePrice + priceOffsets[2] - variation),
     Sony: basePrice + priceOffsets[3] + variation,
   };
-}
-
-function getStoreUrl(merchant: Merchant, productName: string) {
-  const query = encodeURIComponent(productName);
-  const storeUrls: Record<Merchant, string> = {
-    Amazon: `https://www.amazon.in/s?k=${query}`,
-    Flipkart: `https://www.flipkart.com/search?q=${query}`,
-    Meesho: `https://www.meesho.com/search?q=${query}`,
-    Sony: `https://www.sony.co.in/search?q=${query}`,
-  };
-
-  return storeUrls[merchant];
 }
 
 export default function ComparePage() {
@@ -120,7 +109,7 @@ export default function ComparePage() {
                         {isLowest && <p className="text-xs text-green-700 font-bold">Lowest price</p>}
                       </div>
                       <a
-                        href={getStoreUrl(merchant, selectedProduct.name)}
+                        href={getAffiliateUrl(selectedProduct.id)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-4 py-2 border-2 border-primary text-primary rounded-lg font-bold hover:bg-secondary transition"

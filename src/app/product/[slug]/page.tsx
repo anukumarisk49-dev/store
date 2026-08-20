@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { getAffiliateUrl } from '@/data/affiliateLinks';
 
 // This would be populated from the database
 const mockProduct = {
@@ -111,12 +112,12 @@ export default async function ProductPage({ params: _params }: { params: Promise
           {/* CTA Buttons */}
           <div className="flex gap-4">
             <a
-              href={`/api/${selectedMerchant.link}`}
+              href={getAffiliateUrl(mockProduct.id === '1' ? 'electronics-1' : mockProduct.id)}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 bg-primary text-white text-center py-3 rounded-lg font-bold hover:bg-opacity-90 transition"
             >
-              View on {selectedMerchant.name}
+              Buy Now on {selectedMerchant.name}
             </a>
             <button className="flex-1 border-2 border-primary text-primary py-3 rounded-lg font-bold hover:bg-gray-50 transition">
               ♡ Add to Wishlist

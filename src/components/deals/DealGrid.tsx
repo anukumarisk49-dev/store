@@ -133,7 +133,6 @@ export default function DealGrid({ sortBy = 'trending' }: DealGridProps) {
           rating={deal.rating}
           reviewCount={deal.reviewCount}
           merchant={deal.merchant}
-          affiliateUrl={(deal as { affiliateUrl?: string }).affiliateUrl}
         />
       ))}
     </div>

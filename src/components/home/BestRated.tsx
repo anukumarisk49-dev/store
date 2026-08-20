@@ -74,7 +74,6 @@ export default function BestRated() {
           rating={product.rating}
           reviewCount={product.reviewCount}
           merchant={product.merchant}
-          affiliateUrl={(product as { affiliateUrl?: string }).affiliateUrl}
         />
       ))}
     </div>

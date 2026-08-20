@@ -92,7 +92,7 @@ To add a product manually:
 1. Copy an image into `public/images/products/`.
 2. Add a product object to the desired category in `public/data/products.json`.
 3. Set `image` to the repository path, for example `/images/products/my-laptop.jpg`.
-4. Add the real affiliate URL as `affiliateUrl`:
+4. Add the affiliate URL for the product ID in `src/data/affiliateLinks.ts`:
 
 ```json
 {
@@ -104,12 +104,17 @@ To add a product manually:
     "discount": 23,
     "rating": 4.5,
     "reviewCount": 0,
-    "merchant": "Amazon",
-    "affiliateUrl": "https://www.amazon.in/your-affiliate-product-url"
+    "merchant": "Amazon"
 }
 ```
 
-This mode does not need `DATABASE_URL` for displaying products or opening direct affiliate URLs. The Prisma tracking route remains available for click tracking when a database is configured.
+Then add the URL in `src/data/affiliateLinks.ts`:
+
+```ts
+'electronics-my-laptop': 'https://www.amazon.in/your-affiliate-product-url',
+```
+
+Every **Buy Now** button uses this single affiliate link registry. This mode does not need `DATABASE_URL` for displaying products or opening direct affiliate URLs.
 
 ## 📁 Project Structure
 

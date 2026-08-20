@@ -1,5 +1,7 @@
 'use client';
 
+import { getAffiliateUrl } from '@/data/affiliateLinks';
+
 interface ProductCardProps {
   id: string;
   name: string;
@@ -11,10 +13,10 @@ interface ProductCardProps {
   reviewCount: number;
   merchant?: string;
   trackingId?: string;
-  affiliateUrl?: string;
 }
 
 export default function ProductCard({
+  id,
   name,
   image,
   price,
@@ -24,9 +26,8 @@ export default function ProductCard({
   reviewCount,
   merchant,
   trackingId,
-  affiliateUrl,
 }: ProductCardProps) {
-  const dealUrl = affiliateUrl || (trackingId ? `/api/go/${trackingId}` : undefined);
+  const dealUrl = trackingId ? `/api/go/${trackingId}` : getAffiliateUrl(id);
 
   return (
     <div className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden group">
@@ -73,24 +74,14 @@ export default function ProductCard({
         )}
 
         {/* CTA Button */}
-        {dealUrl ? (
-          <a
+        <a
             href={dealUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="block w-full bg-primary text-white text-center py-2 rounded-lg font-bold hover:bg-opacity-90 transition"
           >
-            View Deal
+            Buy Now
           </a>
-        ) : (
-          <button
-            type="button"
-            disabled
-            className="w-full bg-gray-300 text-gray-600 py-2 rounded-lg font-bold cursor-not-allowed"
-          >
-            Link unavailable
-          </button>
-        )}
       </div>
     </div>
   );
