@@ -1,40 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
 // This is the tracking endpoint for affiliate links
 // Route: /api/go/:trackingId
 // Purpose: Log the click and redirect to the merchant's affiliate URL
 
 export async function GET(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: { trackingId: string } }
 ) {
   const trackingId = params.trackingId;
 
   try {
-    // TODO: Log the click to database
-    // 1. Find the affiliate link by trackingId
-    // 2. Record click with:
-    //    - product_id
-    //    - merchant_id
-    //    - affiliate_link_id
-    //    - user_id (if authenticated)
-    //    - device (user-agent)
-    //    - country (ip-geo)
-    //    - source (referrer)
-    //    - timestamp
+    const affiliateLink = await prisma.affiliateLink.findUnique({
+      where: { trackingId },
+    });
 
-    // Example database record:
-    // INSERT INTO affiliate_clicks (
-    //   product_id, merchant_id, affiliate_link_id, 
-    //   user_id, device, country, source, created_at
-    // ) VALUES (...)
+    if (!affiliateLink || affiliateLink.status !== 'active') {
+      return NextResponse.json({ error: 'Affiliate link not found' }, { status: 404 });
+    }
 
-    // For now, return mock response
-    const affiliateUrl = `https://affiliate-merchant.example.com/product/${trackingId}`;
+    await prisma.affiliateClick.create({
+      data: {
+        productId: affiliateLink.productId,
+        merchantId: affiliateLink.merchantId,
+        affiliateLinkId: affiliateLink.id,
+        device: request.headers.get('user-agent'),
+        referrer: request.headers.get('referer'),
+      },
+    });
 
-    // Redirect to the actual affiliate URL
-    return NextResponse.redirect(affiliateUrl, { status: 301 });
+    return NextResponse.redirect(affiliateLink.affiliateUrl, { status: 302 });
   } catch (error) {
+    console.error('Affiliate redirect error:', error);
     return NextResponse.json(
       { error: 'Failed to process affiliate link' },
       { status: 500 }

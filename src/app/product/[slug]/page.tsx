@@ -13,7 +13,7 @@ const mockProduct = {
   rating: 4.5,
   reviewCount: 1250,
   stock: 15,
-  images: ['🎧'],
+  images: ['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=85'],
   features: [
     'Active Noise Cancellation',
     'Upto 30 hours battery life',
@@ -34,8 +34,12 @@ export default function ProductPage({ params: _params }: { params: { slug: strin
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Product Image */}
-        <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center text-8xl">
-          {mockProduct.images[0]}
+        <div className="bg-gray-100 rounded-lg h-96 overflow-hidden flex items-center justify-center">
+          <img
+            src={mockProduct.images[0]}
+            alt={mockProduct.name}
+            className="w-full h-full object-cover"
+          />
         </div>
 
         {/* Product Info */}
@@ -105,9 +109,14 @@ export default function ProductPage({ params: _params }: { params: { slug: strin
 
           {/* CTA Buttons */}
           <div className="flex gap-4">
-            <button className="flex-1 bg-primary text-white py-3 rounded-lg font-bold hover:bg-opacity-90 transition">
+            <a
+              href={`/api/${selectedMerchant.link}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 bg-primary text-white text-center py-3 rounded-lg font-bold hover:bg-opacity-90 transition"
+            >
               View on {selectedMerchant.name}
-            </button>
+            </a>
             <button className="flex-1 border-2 border-primary text-primary py-3 rounded-lg font-bold hover:bg-gray-50 transition">
               ♡ Add to Wishlist
             </button>
