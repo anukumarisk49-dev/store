@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import ProductCard from '@/components/product/ProductCard';
 
 const mockDeals = [
@@ -98,7 +99,21 @@ interface DealGridProps {
 }
 
 export default function DealGrid({ sortBy = 'trending' }: DealGridProps) {
-  let deals = [...mockDeals];
+  const [catalogDeals, setCatalogDeals] = useState(mockDeals);
+
+  useEffect(() => {
+    fetch('/data/products.json')
+      .then((response) => response.json())
+      .then((catalog) => {
+        const products = Object.values(catalog.categories)
+          .flatMap((category: any) => category.products)
+          .slice(0, 8);
+        setCatalogDeals(products);
+      })
+      .catch(() => undefined);
+  }, []);
+
+  let deals = [...catalogDeals];
 
   if (sortBy === 'discount') {
     deals = deals.sort((a, b) => b.discount - a.discount);
@@ -118,6 +133,7 @@ export default function DealGrid({ sortBy = 'trending' }: DealGridProps) {
           rating={deal.rating}
           reviewCount={deal.reviewCount}
           merchant={deal.merchant}
+          affiliateUrl={(deal as { affiliateUrl?: string }).affiliateUrl}
         />
       ))}
     </div>

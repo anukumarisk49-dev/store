@@ -4,7 +4,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
 export const metadata = {
-  title: '99Store - Best Deals & Discounts',
+  title: '99Storepe - Best Deals & Discounts',
   description: 'Discover the best deals and discounts on products from top merchants',
 };
 

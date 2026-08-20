@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import ProductCard from '@/components/product/ProductCard';
 
 const mockProducts = [
@@ -50,9 +51,18 @@ const mockProducts = [
 ];
 
 export default function BestRated() {
+  const [products, setProducts] = useState(mockProducts);
+
+  useEffect(() => {
+    fetch('/data/products.json')
+      .then((response) => response.json())
+      .then((catalog) => setProducts(catalog.categories.electronics.products))
+      .catch(() => undefined);
+  }, []);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {mockProducts.map((product) => (
+      {products.map((product) => (
         <ProductCard
           key={product.id}
           id={product.id}
@@ -64,6 +74,7 @@ export default function BestRated() {
           rating={product.rating}
           reviewCount={product.reviewCount}
           merchant={product.merchant}
+          affiliateUrl={(product as { affiliateUrl?: string }).affiliateUrl}
         />
       ))}
     </div>

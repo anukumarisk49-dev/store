@@ -82,6 +82,35 @@ npm run dev
 
 Visit `http://localhost:3000`
 
+## Manual Catalog Mode (No Database)
+
+Products shown in the homepage, deals, and category pages are managed in `public/data/products.json`.
+Product images are stored in `public/images/products/`.
+
+To add a product manually:
+
+1. Copy an image into `public/images/products/`.
+2. Add a product object to the desired category in `public/data/products.json`.
+3. Set `image` to the repository path, for example `/images/products/my-laptop.jpg`.
+4. Add the real affiliate URL as `affiliateUrl`:
+
+```json
+{
+    "id": "electronics-my-laptop",
+    "name": "My Laptop Deal",
+    "image": "/images/products/my-laptop.jpg",
+    "price": 49999,
+    "originalPrice": 64999,
+    "discount": 23,
+    "rating": 4.5,
+    "reviewCount": 0,
+    "merchant": "Amazon",
+    "affiliateUrl": "https://www.amazon.in/your-affiliate-product-url"
+}
+```
+
+This mode does not need `DATABASE_URL` for displaying products or opening direct affiliate URLs. The Prisma tracking route remains available for click tracking when a database is configured.
+
 ## 📁 Project Structure
 
 ```

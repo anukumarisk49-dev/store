@@ -1,4 +1,4 @@
-'use client';
+import catalog from '../../../../public/data/products.json';
 
 interface CategoryPageProps {
   params: Promise<{
@@ -193,9 +193,11 @@ const categoryProducts = {
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params;
   const category = categoryData[slug];
-  const mockProducts = slug === 'fashion'
+  const fallbackProducts = slug === 'fashion'
     ? fashionProducts
     : categoryProducts[slug as keyof typeof categoryProducts] || electronicsProducts;
+  const catalogProducts = catalog.categories[slug as keyof typeof catalog.categories]?.products;
+  const mockProducts = catalogProducts?.length ? catalogProducts : fallbackProducts;
 
   if (!category) {
     return (
@@ -318,9 +320,20 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                     </div>
                   </div>
 
-                  <button className="w-full bg-primary text-white py-2 rounded-lg font-bold text-sm hover:bg-opacity-90 transition">
-                    View Deal
-                  </button>
+                  {'affiliateUrl' in product ? (
+                    <a
+                      href={(product as { affiliateUrl?: string }).affiliateUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full bg-primary text-white text-center py-2 rounded-lg font-bold text-sm hover:bg-opacity-90 transition"
+                    >
+                      View Deal
+                    </a>
+                  ) : (
+                    <button disabled className="w-full bg-gray-300 text-gray-600 py-2 rounded-lg font-bold text-sm cursor-not-allowed">
+                      Add affiliate URL
+                    </button>
+                  )}
                 </div>
               </div>
             ))}

@@ -48,7 +48,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-700 pt-8">
           <p className="text-center text-gray-400">
-            © 2024 99Store. All rights reserved. | Affiliate-based deal discovery platform
+            © 2024 99Storepe. All rights reserved. | Affiliate-based deal discovery platform
           </p>
         </div>
       </div>

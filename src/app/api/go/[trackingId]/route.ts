@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { getPrisma } from '@/lib/prisma';
 
 // This is the tracking endpoint for affiliate links
 // Route: /api/go/:trackingId
@@ -12,6 +12,7 @@ export async function GET(
   const { trackingId } = await params;
 
   try {
+    const prisma = getPrisma();
     const affiliateLink = await prisma.affiliateLink.findUnique({
       where: { trackingId },
     });

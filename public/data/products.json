@@ -1,0 +1,104 @@
+{
+  "categories": {
+    "electronics": {
+      "name": "Electronics",
+      "icon": "📱",
+      "description": "Latest gadgets and electronics",
+      "products": [
+        { "id": "electronics-1", "name": "boAt Rockerz 450 Wireless Headphones", "image": "/images/products/electronics.svg", "price": 1299, "originalPrice": 2599, "discount": 50, "rating": 4.5, "reviewCount": 1250, "merchant": "Amazon" },
+        { "id": "electronics-2", "name": "Samsung Galaxy M53 128GB", "image": "/images/products/electronics.svg", "price": 12999, "originalPrice": 19999, "discount": 35, "rating": 4.3, "reviewCount": 890, "merchant": "Flipkart" },
+        { "id": "electronics-3", "name": "OnePlus 12 256GB", "image": "/images/products/electronics.svg", "price": 39999, "originalPrice": 49999, "discount": 20, "rating": 4.6, "reviewCount": 1560, "merchant": "OnePlus Store" }
+      ]
+    },
+    "fashion": {
+      "name": "Fashion",
+      "icon": "👕",
+      "description": "Trending fashion and apparel",
+      "products": [
+        { "id": "fashion-1", "name": "Classic Cotton Oversized T-Shirt", "image": "/images/products/fashion.svg", "price": 799, "originalPrice": 1499, "discount": 47, "rating": 4.5, "reviewCount": 1840, "merchant": "Myntra" },
+        { "id": "fashion-2", "name": "Women's Casual Linen Dress", "image": "/images/products/fashion.svg", "price": 1599, "originalPrice": 2999, "discount": 47, "rating": 4.6, "reviewCount": 920, "merchant": "Myntra" },
+        { "id": "fashion-3", "name": "Premium Leather Sneakers", "image": "/images/products/fashion.svg", "price": 2299, "originalPrice": 3999, "discount": 43, "rating": 4.4, "reviewCount": 1260, "merchant": "Ajio" }
+      ]
+    },
+    "home-kitchen": {
+      "name": "Home & Kitchen",
+      "icon": "🏠",
+      "description": "Home and kitchen essentials",
+      "products": [
+        { "id": "home-1", "name": "Modern Ceramic Dinner Set", "image": "/images/products/home-kitchen.svg", "price": 1299, "originalPrice": 2499, "discount": 48, "rating": 4.5, "reviewCount": 860, "merchant": "Amazon" },
+        { "id": "home-2", "name": "Compact Air Fryer", "image": "/images/products/home-kitchen.svg", "price": 2999, "originalPrice": 4999, "discount": 40, "rating": 4.6, "reviewCount": 1240, "merchant": "Flipkart" },
+        { "id": "home-3", "name": "Minimal Table Lamp", "image": "/images/products/home-kitchen.svg", "price": 899, "originalPrice": 1599, "discount": 44, "rating": 4.3, "reviewCount": 520, "merchant": "Amazon" }
+      ]
+    },
+    "beauty": {
+      "name": "Beauty",
+      "icon": "💄",
+      "description": "Beauty and personal care products",
+      "products": [
+        { "id": "beauty-1", "name": "Natural Skincare Essentials", "image": "/images/products/beauty.svg", "price": 999, "originalPrice": 1799, "discount": 44, "rating": 4.5, "reviewCount": 920, "merchant": "Nykaa" },
+        { "id": "beauty-2", "name": "Everyday Makeup Collection", "image": "/images/products/beauty.svg", "price": 1499, "originalPrice": 2499, "discount": 40, "rating": 4.4, "reviewCount": 680, "merchant": "Nykaa" },
+        { "id": "beauty-3", "name": "Floral Eau de Parfum", "image": "/images/products/beauty.svg", "price": 1199, "originalPrice": 1999, "discount": 40, "rating": 4.6, "reviewCount": 430, "merchant": "Amazon" }
+      ]
+    },
+    "mobile-accessories": {
+      "name": "Mobile Accessories",
+      "icon": "📞",
+      "description": "Phone and mobile accessories",
+      "products": [
+        { "id": "mobile-1", "name": "Fast Charging Power Bank", "image": "/images/products/mobile-accessories.svg", "price": 1099, "originalPrice": 1999, "discount": 45, "rating": 4.4, "reviewCount": 1100, "merchant": "Amazon" },
+        { "id": "mobile-2", "name": "Wireless Phone Charger", "image": "/images/products/mobile-accessories.svg", "price": 699, "originalPrice": 1299, "discount": 46, "rating": 4.3, "reviewCount": 760, "merchant": "Flipkart" },
+        { "id": "mobile-3", "name": "Protective Phone Case", "image": "/images/products/mobile-accessories.svg", "price": 399, "originalPrice": 799, "discount": 50, "rating": 4.2, "reviewCount": 510, "merchant": "Amazon" }
+      ]
+    },
+    "grocery": {
+      "name": "Grocery",
+      "icon": "🛒",
+      "description": "Fresh groceries and food items",
+      "products": [
+        { "id": "grocery-1", "name": "Organic Pantry Starter Box", "image": "/images/products/grocery.svg", "price": 799, "originalPrice": 1099, "discount": 27, "rating": 4.5, "reviewCount": 340, "merchant": "BigBasket" },
+        { "id": "grocery-2", "name": "Fresh Seasonal Fruit Basket", "image": "/images/products/grocery.svg", "price": 599, "originalPrice": 799, "discount": 25, "rating": 4.4, "reviewCount": 280, "merchant": "BigBasket" },
+        { "id": "grocery-3", "name": "Premium Coffee Beans", "image": "/images/products/grocery.svg", "price": 449, "originalPrice": 699, "discount": 36, "rating": 4.7, "reviewCount": 620, "merchant": "Amazon" }
+      ]
+    },
+    "gaming": {
+      "name": "Gaming",
+      "icon": "🎮",
+      "description": "Gaming consoles and accessories",
+      "products": [
+        { "id": "gaming-1", "name": "Wireless Gaming Controller", "image": "/images/products/gaming.svg", "price": 2499, "originalPrice": 3999, "discount": 38, "rating": 4.6, "reviewCount": 980, "merchant": "Amazon" },
+        { "id": "gaming-2", "name": "RGB Mechanical Keyboard", "image": "/images/products/gaming.svg", "price": 2199, "originalPrice": 3499, "discount": 37, "rating": 4.5, "reviewCount": 740, "merchant": "Flipkart" },
+        { "id": "gaming-3", "name": "Gaming Headset with Microphone", "image": "/images/products/gaming.svg", "price": 1599, "originalPrice": 2499, "discount": 36, "rating": 4.4, "reviewCount": 530, "merchant": "Amazon" }
+      ]
+    },
+    "sports": {
+      "name": "Sports",
+      "icon": "⚽",
+      "description": "Sports equipment and gear",
+      "products": [
+        { "id": "sports-1", "name": "Lightweight Yoga Mat", "image": "/images/products/sports.svg", "price": 699, "originalPrice": 1199, "discount": 42, "rating": 4.5, "reviewCount": 810, "merchant": "Amazon" },
+        { "id": "sports-2", "name": "Adjustable Dumbbell Set", "image": "/images/products/sports.svg", "price": 2499, "originalPrice": 3999, "discount": 38, "rating": 4.6, "reviewCount": 470, "merchant": "Flipkart" },
+        { "id": "sports-3", "name": "Performance Running Shoes", "image": "/images/products/sports.svg", "price": 1899, "originalPrice": 2999, "discount": 37, "rating": 4.4, "reviewCount": 920, "merchant": "Myntra" }
+      ]
+    },
+    "books": {
+      "name": "Books",
+      "icon": "📚",
+      "description": "Books for every reader",
+      "products": [
+        { "id": "books-1", "name": "The Modern Reading Collection", "image": "/images/products/books.svg", "price": 699, "originalPrice": 999, "discount": 30, "rating": 4.7, "reviewCount": 340, "merchant": "Amazon" },
+        { "id": "books-2", "name": "Classic Hardcover Novel", "image": "/images/products/books.svg", "price": 449, "originalPrice": 699, "discount": 36, "rating": 4.6, "reviewCount": 280, "merchant": "Amazon" },
+        { "id": "books-3", "name": "Daily Journal and Planner", "image": "/images/products/books.svg", "price": 299, "originalPrice": 499, "discount": 40, "rating": 4.5, "reviewCount": 190, "merchant": "Flipkart" }
+      ]
+    },
+    "toys": {
+      "name": "Toys",
+      "icon": "🧸",
+      "description": "Fun toys for every age",
+      "products": [
+        { "id": "toys-1", "name": "Wooden Building Blocks", "image": "/images/products/toys.svg", "price": 799, "originalPrice": 1299, "discount": 38, "rating": 4.6, "reviewCount": 420, "merchant": "Amazon" },
+        { "id": "toys-2", "name": "Plush Teddy Bear", "image": "/images/products/toys.svg", "price": 599, "originalPrice": 999, "discount": 40, "rating": 4.5, "reviewCount": 360, "merchant": "Flipkart" },
+        { "id": "toys-3", "name": "Creative Art Kit for Kids", "image": "/images/products/toys.svg", "price": 499, "originalPrice": 899, "discount": 44, "rating": 4.4, "reviewCount": 240, "merchant": "Amazon" }
+      ]
+    }
+  }
+}

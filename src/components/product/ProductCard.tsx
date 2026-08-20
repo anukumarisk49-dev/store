@@ -11,6 +11,7 @@ interface ProductCardProps {
   reviewCount: number;
   merchant?: string;
   trackingId?: string;
+  affiliateUrl?: string;
 }
 
 export default function ProductCard({
@@ -23,7 +24,10 @@ export default function ProductCard({
   reviewCount,
   merchant,
   trackingId,
+  affiliateUrl,
 }: ProductCardProps) {
+  const dealUrl = affiliateUrl || (trackingId ? `/api/go/${trackingId}` : undefined);
+
   return (
     <div className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden group">
       {/* Image Container */}
@@ -69,9 +73,9 @@ export default function ProductCard({
         )}
 
         {/* CTA Button */}
-        {trackingId ? (
+        {dealUrl ? (
           <a
-            href={`/api/go/${trackingId}`}
+            href={dealUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="block w-full bg-primary text-white text-center py-2 rounded-lg font-bold hover:bg-opacity-90 transition"

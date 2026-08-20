@@ -7,7 +7,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="text-3xl font-bold text-primary">
-            99STORE
+            99STOREPE
           </div>
 
           {/* Search Bar */}
