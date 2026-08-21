@@ -74,7 +74,7 @@ export default function ProductCard({
   return (
     <div className="group [perspective:1000px]" onPointerMove={handlePointerMove} onPointerLeave={resetTilt}>
       <div
-        className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm transition-[transform,box-shadow] duration-200 ease-out motion-reduce:transform-none"
+        className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition-[transform,box-shadow] duration-200 ease-out motion-reduce:transform-none"
         style={{
           transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateZ(0)`,
           transformStyle: 'preserve-3d',
@@ -82,59 +82,63 @@ export default function ProductCard({
           willChange: 'transform',
         }}
       >
-        <div className="relative h-40 w-full overflow-hidden bg-gray-50 [transform-style:preserve-3d] sm:h-44">
+        <div className="relative h-52 w-full overflow-hidden bg-[linear-gradient(145deg,#f8fafb,#eef3f5)] [transform-style:preserve-3d] sm:h-56">
         {image ? (
           <img
             src={image}
             alt={alt || name}
-            className="h-full w-full object-contain p-3 transition-transform duration-300 motion-reduce:transform-none"
+            className="h-full w-full object-contain p-5 transition-transform duration-300 motion-reduce:transform-none"
             style={{ transform: 'translateZ(24px) scale(1.03)' }}
           />
         ) : (
           <div className="w-full h-full bg-gray-300 flex items-center justify-center">No Image</div>
         )}
         {discount > 0 && (
-          <div className="absolute right-2 top-2 rounded bg-danger px-2 py-1 text-[10px] font-black text-white">
+          <div className="absolute left-3 top-3 rounded-md bg-danger px-2.5 py-1.5 text-[10px] font-black text-white shadow-sm">
             -{discount}%
           </div>
         )}
+        <span className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg text-gray-500 shadow-sm" aria-label="Save product">♡</span>
         {showTimer && secondsLeft !== null && secondsLeft > 0 && (
-          <div className="absolute bottom-2 left-2 rounded bg-red-600 px-2 py-1 text-xs font-bold text-white">
+          <div className="absolute bottom-3 left-3 rounded-md bg-[#173a2a] px-2 py-1 text-[10px] font-bold text-white">
             Ends in {timerText}
           </div>
         )}
         </div>
 
-        <div className="p-3.5">
-        <h3 className="mb-2 line-clamp-2 text-xs font-bold leading-5 transition group-hover:text-primary">
+        <div className="p-4">
+        <h3 className="mb-2 line-clamp-2 min-h-10 text-sm font-black leading-5 text-[#173a2a] transition group-hover:text-primary">
           {name}
         </h3>
 
         {/* Ratings */}
-        <div className="mb-2 flex items-center gap-2 text-[10px]">
-          <span className="text-yellow-500">★ {rating}</span>
-          <span className="text-gray-500">({reviewCount})</span>
+        <div className="mb-3 flex items-center gap-2 text-[11px]">
+          <span className="rounded bg-[#168544] px-1.5 py-0.5 font-black text-white">★ {rating.toFixed(1)}</span>
+          <span className="text-gray-500">{reviewCount.toLocaleString('en-IN')} reviews</span>
         </div>
 
         {/* Pricing */}
-        <div className="mb-2">
-          <div className="flex gap-2 items-center">
-            <span className="text-lg font-black text-primary">₹{price.toLocaleString('en-IN')}</span>
-            <span className="text-[10px] text-gray-500 line-through">₹{originalPrice.toLocaleString('en-IN')}</span>
+        <div className="mb-3">
+          <div className="flex items-baseline gap-2">
+            <span className="text-2xl font-black text-primary">₹{price.toLocaleString('en-IN')}</span>
+            <span className="text-xs text-gray-500 line-through">₹{originalPrice.toLocaleString('en-IN')}</span>
+            {discount > 0 && <span className="text-xs font-bold text-danger">{discount}% off</span>}
           </div>
+          <p className="mt-1 text-[10px] text-gray-500">Inclusive of all taxes</p>
         </div>
 
-        {merchant && (
-          <p className="mb-2 text-[10px] text-gray-500">{merchant}</p>
-        )}
+        <div className="mb-4 grid grid-cols-2 gap-2 border-y border-gray-100 py-3 text-[10px]">
+          <div><span className="block font-black text-[#173a2a]">✓ Trusted seller</span><span className="mt-1 block text-gray-500">{merchant || 'Verified merchant'}</span></div>
+          <div><span className="block font-black text-[#173a2a]">⚡ Best price</span><span className="mt-1 block text-gray-500">Compare before buying</span></div>
+        </div>
 
         {/* CTA Button */}
         <a
           href={buyUrl}
           target="_blank"
-          rel="noopener noreferrer"
+          rel="sponsored nofollow noopener noreferrer"
           onClick={() => logAffiliateClick(id, loggedUrl)}
-          className="block w-full rounded-md bg-primary py-2 text-center text-[11px] font-black text-white transition hover:bg-[#4ea875]"
+          className="block w-full rounded-md bg-primary py-3 text-center text-xs font-black text-white transition hover:bg-[#4ea875]"
         >
           Buy Now
         </a>
