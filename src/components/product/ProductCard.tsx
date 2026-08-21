@@ -38,6 +38,7 @@ export default function ProductCard({
   const buyUrl = trackingId ? `/api/go/${trackingId}` : affiliateUrl || getAffiliateUrl(id);
   const loggedUrl = affiliateUrl || getAffiliateUrl(id);
   const [secondsLeft, setSecondsLeft] = useState<number | null>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     if (!showTimer) return;
@@ -59,15 +60,35 @@ export default function ProductCard({
     ? ''
     : `${String(Math.floor(secondsLeft / 3600)).padStart(2, '0')}:${String(Math.floor((secondsLeft % 3600) / 60)).padStart(2, '0')}:${String(secondsLeft % 60).padStart(2, '0')}`;
 
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== 'mouse') return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    setTilt({ x: Number((y * -8).toFixed(2)), y: Number((x * 8).toFixed(2)) });
+  };
+
+  const resetTilt = () => setTilt({ x: 0, y: 0 });
+
   return (
-    <div className="group overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-      {/* Image Container */}
-      <div className="relative h-40 w-full overflow-hidden bg-gray-50 sm:h-44">
+    <div className="group [perspective:1000px]" onPointerMove={handlePointerMove} onPointerLeave={resetTilt}>
+      <div
+        className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm transition-[transform,box-shadow] duration-200 ease-out motion-reduce:transform-none"
+        style={{
+          transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateZ(0)`,
+          transformStyle: 'preserve-3d',
+          boxShadow: tilt.x || tilt.y ? '0 20px 36px rgba(23, 58, 42, 0.2)' : undefined,
+          willChange: 'transform',
+        }}
+      >
+        <div className="relative h-40 w-full overflow-hidden bg-gray-50 [transform-style:preserve-3d] sm:h-44">
         {image ? (
           <img
             src={image}
             alt={alt || name}
-            className="h-full w-full object-contain p-3 transition-transform duration-300 group-hover:scale-105"
+            className="h-full w-full object-contain p-3 transition-transform duration-300 motion-reduce:transform-none"
+            style={{ transform: 'translateZ(24px) scale(1.03)' }}
           />
         ) : (
           <div className="w-full h-full bg-gray-300 flex items-center justify-center">No Image</div>
@@ -82,10 +103,9 @@ export default function ProductCard({
             Ends in {timerText}
           </div>
         )}
-      </div>
+        </div>
 
-      {/* Content */}
-      <div className="p-3.5">
+        <div className="p-3.5">
         <h3 className="mb-2 line-clamp-2 text-xs font-bold leading-5 transition group-hover:text-primary">
           {name}
         </h3>
@@ -118,6 +138,7 @@ export default function ProductCard({
         >
           Buy Now
         </a>
+        </div>
       </div>
     </div>
   );
