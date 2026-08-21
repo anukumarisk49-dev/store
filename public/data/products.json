@@ -338,42 +338,6 @@
       "description": "Beauty and personal care products",
       "products": [
         {
-          "id": "beauty-1",
-          "name": "Natural Skincare Essentials",
-          "image": "/images/products/beauty.svg",
-          "price": 999,
-          "originalPrice": 1799,
-          "discount": 44,
-          "rating": 4.5,
-          "reviewCount": 920,
-          "merchant": "Nykaa",
-          "affiliateUrl": "https://www.nykaa.com/search/result/?q=skincare"
-        },
-        {
-          "id": "beauty-2",
-          "name": "Everyday Makeup Collection",
-          "image": "/images/products/beauty.svg",
-          "price": 1499,
-          "originalPrice": 2499,
-          "discount": 40,
-          "rating": 4.4,
-          "reviewCount": 680,
-          "merchant": "Nykaa",
-          "affiliateUrl": "https://www.nykaa.com/search/result/?q=makeup"
-        },
-        {
-          "id": "beauty-3",
-          "name": "Floral Eau de Parfum",
-          "image": "/images/products/beauty.svg",
-          "price": 1199,
-          "originalPrice": 1999,
-          "discount": 40,
-          "rating": 4.6,
-          "reviewCount": 430,
-          "merchant": "Amazon",
-          "affiliateUrl": "https://www.amazon.in/s?k=floral+perfume"
-        },
-        {
           "id": "beauty-4",
           "name": "FRIPPE Derma roller 0.5mm for hair & beard growth| 0.5 mm Titanium 540 micro needles",
           "image": "https://rukmini1.flixcart.com/image/1500/1500/xif0q/skin-treatment/e/q/n/50-derma-roller-0-5mm-for-hair-beard-growth-0-5-mm-titanium-540-original-imahmkhfgtn8trdm.jpeg?q=70",
