@@ -18,6 +18,10 @@
   </g>
   <text x="205" y="151" fill="url(#green)" font-family="Arial,sans-serif" font-size="108" font-weight="900" letter-spacing="-5">99</text>
   <text x="365" y="151" fill="#ff6a0a" font-family="Arial,sans-serif" font-size="108" font-weight="900" letter-spacing="-5">STOREPE</text>
+  <circle cx="531" cy="112" r="39" fill="#ff6a0a"/>
+  <path d="M515 111V99c0-9 7-16 16-16s16 7 16 16v12" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+  <rect x="507" y="106" width="48" height="35" rx="6" fill="#fff"/>
+  <path d="M500 126c11 2 19 8 28 15 13-14 24-21 43-28-13 17-25 31-42 43-11-9-19-18-29-30Z" fill="#079746"/>
   <text x="918" y="62" fill="#222" font-family="Arial,sans-serif" font-size="10" font-weight="700">TM</text>
   <path d="M365 184h42" stroke="#079746" stroke-width="4"/>
   <text x="426" y="194" fill="#25282d" font-family="Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="1.2">COMPARE PRICES. FIND DEALS. <tspan fill="#079746">SAVE MORE.</tspan></text>
