@@ -17,6 +17,7 @@ interface CategoryProduct {
   affiliateUrl?: string;
   brand?: string;
   merchant?: string;
+  category?: string;
 }
 
 interface CategoryProductGridProps {
@@ -42,6 +43,7 @@ export default function CategoryProductGrid({ products }: CategoryProductGridPro
       if (sortBy === 'price-high') return secondProduct.price - firstProduct.price;
       if (sortBy === 'discount') return secondProduct.discount - firstProduct.discount;
       if (sortBy === 'rating') return secondProduct.rating - firstProduct.rating;
+      if (sortBy === 'category') return (firstProduct.category || '').localeCompare(secondProduct.category || '');
       return 0;
     });
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / productsPerPage));
@@ -106,6 +108,7 @@ export default function CategoryProductGrid({ products }: CategoryProductGridPro
               <option value="price-high">Price: High to Low</option>
               <option value="discount">Highest Discount</option>
               <option value="rating">Best Rating</option>
+              <option value="category">Category: A to Z</option>
             </select>
           </div>
 

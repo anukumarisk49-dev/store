@@ -18,7 +18,7 @@ const categories = [
 
 export default function CategoryGrid() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div className="flex gap-2 overflow-x-auto pb-2 md:grid md:grid-cols-5 lg:grid-cols-10">
       {categories.map((category) => (
         <CategoryCard
           key={category.name}

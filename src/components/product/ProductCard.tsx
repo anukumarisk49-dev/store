@@ -60,20 +60,20 @@ export default function ProductCard({
     : `${String(Math.floor(secondsLeft / 3600)).padStart(2, '0')}:${String(Math.floor((secondsLeft % 3600) / 60)).padStart(2, '0')}:${String(secondsLeft % 60).padStart(2, '0')}`;
 
   return (
-    <div className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden group">
+    <div className="group overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
       {/* Image Container */}
-      <div className="relative w-full h-48 bg-gray-200 overflow-hidden">
+      <div className="relative h-40 w-full overflow-hidden bg-gray-50 sm:h-44">
         {image ? (
           <img
             src={image}
             alt={alt || name}
-            className="w-full h-full object-contain p-2 transition-transform duration-300"
+            className="h-full w-full object-contain p-3 transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
           <div className="w-full h-full bg-gray-300 flex items-center justify-center">No Image</div>
         )}
         {discount > 0 && (
-          <div className="absolute top-2 right-2 bg-danger text-white px-3 py-1 rounded-full text-sm font-bold">
+          <div className="absolute right-2 top-2 rounded bg-danger px-2 py-1 text-[10px] font-black text-white">
             -{discount}%
           </div>
         )}
@@ -85,27 +85,27 @@ export default function ProductCard({
       </div>
 
       {/* Content */}
-      <div className="p-4">
-        <h3 className="font-bold text-sm line-clamp-2 mb-2 group-hover:text-primary transition">
+      <div className="p-3.5">
+        <h3 className="mb-2 line-clamp-2 text-xs font-bold leading-5 transition group-hover:text-primary">
           {name}
         </h3>
 
         {/* Ratings */}
-        <div className="flex items-center gap-2 mb-3 text-xs">
+        <div className="mb-2 flex items-center gap-2 text-[10px]">
           <span className="text-yellow-500">★ {rating}</span>
           <span className="text-gray-500">({reviewCount})</span>
         </div>
 
         {/* Pricing */}
-        <div className="mb-3">
+        <div className="mb-2">
           <div className="flex gap-2 items-center">
-            <span className="text-2xl font-bold text-primary">₹{price}</span>
-            <span className="text-sm text-gray-500 line-through">₹{originalPrice}</span>
+            <span className="text-lg font-black text-primary">₹{price.toLocaleString('en-IN')}</span>
+            <span className="text-[10px] text-gray-500 line-through">₹{originalPrice.toLocaleString('en-IN')}</span>
           </div>
         </div>
 
         {merchant && (
-          <p className="text-xs text-gray-600 mb-3">{merchant}</p>
+          <p className="mb-2 text-[10px] text-gray-500">{merchant}</p>
         )}
 
         {/* CTA Button */}
@@ -114,7 +114,7 @@ export default function ProductCard({
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => logAffiliateClick(id, loggedUrl)}
-          className="block w-full bg-primary text-white text-center py-2 rounded-lg font-bold hover:bg-opacity-90 transition"
+          className="block w-full rounded-md bg-primary py-2 text-center text-[11px] font-black text-white transition hover:bg-[#4ea875]"
         >
           Buy Now
         </a>

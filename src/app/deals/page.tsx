@@ -1,13 +1,19 @@
+import DealGrid from '@/components/deals/DealGrid';
+
 export default function DealsPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8">All Deals</h1>
+    <div className="mx-auto max-w-[1400px] px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mb-8 rounded-xl bg-[#eaf7ee] px-6 py-7 sm:px-10">
+        <p className="text-xs font-black uppercase tracking-widest text-primary">Compare before you buy</p>
+        <h1 className="mt-2 text-3xl font-black text-[#173a2a]">All Deals</h1>
+        <p className="mt-2 text-sm text-gray-600">Fresh price drops and worthwhile offers from the catalog.</p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
         {/* Filters Sidebar */}
         <aside className="md:col-span-1">
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="font-bold text-lg mb-4">Filters</h3>
+          <div className="rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
+            <h3 className="mb-4 text-lg font-black">Filters</h3>
 
             {/* Price Range */}
             <div className="mb-6">
@@ -36,7 +42,7 @@ export default function DealsPage() {
               </select>
             </div>
 
-            <button className="w-full bg-primary text-white py-2 rounded-lg font-bold">
+            <button type="button" className="w-full rounded-md bg-primary py-2 text-sm font-bold text-white">
               Apply Filters
             </button>
           </div>
@@ -44,7 +50,7 @@ export default function DealsPage() {
 
         {/* Products Grid */}
         <div className="md:col-span-3">
-          <div className="flex justify-between items-center mb-6">
+          <div className="mb-4 flex items-center justify-between">
             <p className="text-gray-600">Showing 1-20 of 342 deals</p>
             <select className="px-3 py-2 border rounded">
               <option>Sort by</option>
@@ -56,10 +62,7 @@ export default function DealsPage() {
             </select>
           </div>
 
-          {/* This would be filled with DealGrid component */}
-          <div className="text-center text-gray-500 py-12">
-            Load deals here...
-          </div>
+          <div className="rounded-xl border border-gray-100 bg-white p-3 shadow-sm sm:p-5"><DealGrid /></div>
         </div>
       </div>
     </div>

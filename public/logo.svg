@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 250" role="img" aria-labelledby="title desc">
+  <title id="title">99StorePe</title>
+  <desc id="desc">99StorePe compare prices, find deals, save more</desc>
+  <defs>
+    <linearGradient id="green" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#09b84a"/><stop offset="1" stop-color="#087b42"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ff9d00"/><stop offset="1" stop-color="#ff5b0b"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(18 28)">
+    <path d="M38 65h104l24 118H14Z" fill="url(#green)"/>
+    <path d="M64 68V40c0-28 21-45 44-45s44 17 44 45v28h-16V41c0-18-12-29-28-29S80 23 80 41v27Z" fill="none" stroke="#08ad47" stroke-width="16" stroke-linecap="round"/>
+    <path d="m93 78 50 25-18 71-76 14 18-71Z" fill="url(#orange)" stroke="#fff" stroke-width="7"/>
+    <circle cx="116" cy="112" r="10" fill="#fff"/>
+    <text x="71" y="154" fill="#fff" font-family="Arial,sans-serif" font-size="37" font-weight="700">₹</text>
+  </g>
+  <text x="205" y="151" fill="url(#green)" font-family="Arial,sans-serif" font-size="108" font-weight="900" letter-spacing="-5">99</text>
+  <text x="365" y="151" fill="#ff6a0a" font-family="Arial,sans-serif" font-size="108" font-weight="900" letter-spacing="-5">STOREPE</text>
+  <text x="918" y="62" fill="#222" font-family="Arial,sans-serif" font-size="10" font-weight="700">TM</text>
+  <path d="M365 184h42" stroke="#079746" stroke-width="4"/>
+  <text x="426" y="194" fill="#25282d" font-family="Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="1.2">COMPARE PRICES. FIND DEALS. <tspan fill="#079746">SAVE MORE.</tspan></text>
+</svg>
