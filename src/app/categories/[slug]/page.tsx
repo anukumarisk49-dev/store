@@ -1,10 +1,26 @@
 import catalog from '../../../../public/data/products.json';
 import CategoryProductGrid from '@/components/category/CategoryProductGrid';
+import type { Metadata } from 'next';
 
 interface CategoryPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const category = categoryData[slug];
+
+  if (!category) {
+    return { title: 'Category Not Found' };
+  }
+
+  return {
+    title: `${category.name} Deals & Products`,
+    description: `${category.description}. Find affordable ${category.name.toLowerCase()} deals and products at 99StorePe.`,
+    alternates: { canonical: `/categories/${slug}` },
+  };
 }
 
 // Mock categories data
